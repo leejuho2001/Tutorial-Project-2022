@@ -1,28 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Animation_Trigger : MonoBehaviour
 {
     Animator _animator;
 
-    // Start is called before the first frame update
     void Start()
     {
         _animator = gameObject.GetComponent<Animator>();
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+     
+    }
+
+    bool _IsOpen = false;
+    public void SwitchOpen()
+    {
+        if (_IsOpen == false)
         {
-            _animator.SetBool("IsOpen",true);
+            _animator.SetBool("IsOpen", true);
+            _IsOpen = true;
         }
 
-        else if (Input.GetKeyUp(KeyCode.P))
+        else if (_IsOpen == true)
         {
-            _animator.SetBool("IsOpen",false);
+            _animator.SetBool("IsOpen", false);
+            _IsOpen = false;
         }
     }
 }
