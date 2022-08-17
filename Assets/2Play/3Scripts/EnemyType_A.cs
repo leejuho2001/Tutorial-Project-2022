@@ -9,14 +9,25 @@ public class EnemyType_A : MonoBehaviour
     SpriteRenderer spriteRender;
 
     public int nextMove;
-    public int speed;
+    public float speed;
     public int healthPoint;
+    public string enemyName;
 
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
         enemyCollider = GetComponent<CapsuleCollider2D>();
         spriteRender = GetComponent<SpriteRenderer>();
+
+        switch (enemyName)
+        {
+            case "Small":
+                healthPoint = 10;
+                break;
+            case "Large":
+                healthPoint = 30;
+                break;
+        }
 
         enemyMove();
     }
@@ -46,6 +57,16 @@ public class EnemyType_A : MonoBehaviour
         Invoke("enemyMove", nextMoveTime);
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Bullet")
+        {
+            Bullet bullet = collision.gameObject.GetComponent<Bullet>();
+            onDamaged(bullet.damage);
+            collision.gameObject.SetActive(false);
+        }
+    }
+
     void turn()
     {
         nextMove = nextMove * (-1);
@@ -57,8 +78,8 @@ public class EnemyType_A : MonoBehaviour
     {
         healthPoint -= damage;
 
-        //Sprite Alpha
-        spriteRender.color = new Color(1, 1, 1, 0.4f);
+        hittedColor();
+        Invoke("changeColor", 0.2f);
 
         //collider Disable
         if (healthPoint <= 0)
@@ -76,6 +97,16 @@ public class EnemyType_A : MonoBehaviour
     void deActive()
     {
         gameObject.SetActive(false);
-
     }
+
+    public void changeColor()
+    {
+        spriteRender.color = new Color(1, 1, 1, 1);
+    }
+
+    public void hittedColor()
+    {
+        spriteRender.color = new Color(1, 1, 1, 0.4f);
+    }
+  
 }

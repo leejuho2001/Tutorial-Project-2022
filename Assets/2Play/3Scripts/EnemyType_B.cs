@@ -11,6 +11,13 @@ public class EnemyType_B : MonoBehaviour
     public int nextMove;
     public int speed;
     public int healthPoint;
+    public int jumpPower;
+
+    public GameObject shootingInk;
+    public Transform pos;
+    public float cooltime;
+    private float curtime;
+
 
     private void Awake()
     {
@@ -23,17 +30,27 @@ public class EnemyType_B : MonoBehaviour
 
     void FixedUpdate()
     {
-        //Move
-        rigid.velocity = new Vector2(nextMove,rigid.velocity.y) * speed;
+        Invoke("Jump", 5);
+    }
 
-        //Check 
-        Vector2 HorizonVector = new Vector2(rigid.position.x + (nextMove * 0.2f), rigid.position.y );
-        Debug.DrawRay(HorizonVector, Vector3.down, new Color(0, 1, 0));
-        RaycastHit2D rayHit = Physics2D.Raycast(HorizonVector, Vector3.down, 1, LayerMask.GetMask("platform"));
-
-        if (rayHit.collider == null)
+    void Update()
+    {
+        if(curtime >= cooltime)
         {
-            turn();
+            shooting();
+            curtime = 0;
+        }
+
+        curtime += Time.deltaTime;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Bullet")
+        {
+            Bullet bullet = collision.gameObject.GetComponent<Bullet>();
+            onDamaged(bullet.damage);
+            collision.gameObject.SetActive(false);
         }
     }
 
@@ -57,7 +74,8 @@ public class EnemyType_B : MonoBehaviour
         healthPoint -= damage;
 
         //Sprite Alpha
-        spriteRender.color = new Color(1, 1, 1, 0.4f);
+        hittedColor();
+        Invoke("changeColor", 0.2f);
 
         //collider Disable
         if (healthPoint <= 0)
@@ -68,8 +86,15 @@ public class EnemyType_B : MonoBehaviour
             //Destroy
             Invoke("DeActive", 3);
         }
+    }
 
-
+    void Jump()
+    {
+        rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+    }
+    public void shooting()
+    {
+        Instantiate(shootingInk, pos.position, transform.rotation);
     }
 
     void DeActive()
@@ -77,4 +102,15 @@ public class EnemyType_B : MonoBehaviour
         gameObject.SetActive(false);
 
     }
+
+    public void changeColor()
+    {
+        spriteRender.color = new Color(1, 1, 1, 1);
+    }
+
+    public void hittedColor()
+    {
+        spriteRender.color = new Color(1, 1, 1, 0.4f);
+    }
+
 }
