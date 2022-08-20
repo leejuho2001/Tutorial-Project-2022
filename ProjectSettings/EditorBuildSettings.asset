@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/1Title/1Scenes/play_for_ui.unity
     guid: b1e2df2b92e74ab4d866ff9a6119bde2
+  - enabled: 1
+    path: Assets/1Title/1Scenes/Ending.unity
+    guid: 3937d35ca7bc9084d976fa0b91bd2d2c
   m_configObjects: {}
