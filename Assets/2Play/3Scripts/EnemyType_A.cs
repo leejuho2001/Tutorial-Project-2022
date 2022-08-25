@@ -61,7 +61,7 @@ public class EnemyType_A : MonoBehaviour
     {
         if (collision.gameObject.tag == "Bullet")
         {
-            Bullet bullet = collision.gameObject.GetComponent<Bullet>();
+            Bullet_Properties bullet = collision.gameObject.GetComponent<Bullet_Properties>();
             onDamaged(bullet.damage);
             collision.gameObject.SetActive(false);
         }

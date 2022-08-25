@@ -28,7 +28,6 @@ namespace non_playable
             while (spec.givHP() > 500)
             {
                 Debug.Log(spec.givHP());
-                Debug.Log(rigid.velocity.x);
                 yield return new WaitForSeconds(2.0f);
             }
         }
