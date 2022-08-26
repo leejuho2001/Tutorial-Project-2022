@@ -10,6 +10,10 @@ namespace playable
         BoxCollider2D collid;
         playable.CharacterAct acter;
 
+        //산소 UI슬라이더와 연결
+        [SerializeField] UI_Manager _uimanager;
+        //산소 UI슬라이더와 연결
+
         [SerializeField] int oxygen;
         [SerializeField] int oxyuse;
         [SerializeField] int maxVelocity;
@@ -44,6 +48,10 @@ namespace playable
             Vector3 objectScale = transform.localScale;
             reSize(objectScale);
             StartCoroutine("usingOxy");
+
+            //산소 UI슬라이더와 연결
+            _uimanager.SetOxygen(oxygen);
+            //산소 UI슬라이더와 연결
         }
         private void reSize(Vector3 vector)
         {
@@ -154,6 +162,9 @@ namespace playable
                     shootCooltime(shootDelay);
                 }
             }
+            //산소 UI슬라이더와 연결
+            _uimanager.SetOxygen(oxygen);
+            //산소 UI슬라이더와 연결
         }
     }
 }
