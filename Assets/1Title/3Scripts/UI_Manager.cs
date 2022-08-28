@@ -12,7 +12,7 @@ public class UI_Manager : MonoBehaviour
     {
         _OxygenBar.value = _arg;
     }
-
+    // 캐릭터와 ui manager 연결 해야 작동함
     // Start is called before the first frame update
     void Start()
     {
