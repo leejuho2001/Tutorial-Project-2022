@@ -6,6 +6,7 @@ public class Bullet_Properties : MonoBehaviour
 {
     [SerializeField] float bulletSpeed;
     [SerializeField] float bulletHold;
+    [SerializeField] public int damage;
 
     Vector3 disabled;
     Rigidbody2D rigid;
