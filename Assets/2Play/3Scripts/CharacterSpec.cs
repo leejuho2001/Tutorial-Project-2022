@@ -50,7 +50,7 @@ namespace playable
             StartCoroutine("usingOxy");
 
             //산소 UI슬라이더와 연결
-            _uimanager.SetOxygen(oxygen);
+            _uimanager.SetOxygen(givHP());
             //산소 UI슬라이더와 연결
         }
         private void reSize(Vector3 vector)
@@ -133,6 +133,7 @@ namespace playable
             {
                 HP -= oxyuse;
                 yield return new WaitForSeconds(0.1f);
+                
             }
         }
 
@@ -170,8 +171,9 @@ namespace playable
                 }
             }
             //산소 UI슬라이더와 연결
-            _uimanager.SetOxygen(oxygen);
+            _uimanager.SetOxygen(givHP() / oxygen);
             //산소 UI슬라이더와 연결
+
         }
     }
 }
