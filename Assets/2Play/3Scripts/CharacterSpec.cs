@@ -106,10 +106,17 @@ namespace playable
             yield return new WaitForSeconds(cool);
             canShoot = true;
         }
+        public void p_Heal(int percent)
+        {
+            float onePercent = oxygen * 0.01f;
+            float result = onePercent * percent + HP;
+            if (result > oxygen) HP = oxygen;
+            else HP = result;
+        }
 
         public void p_damage(int percent)
         {
-            float onePercent = HP * 0.01f;
+            float onePercent = oxygen * 0.01f;
             HP -= onePercent * percent;
         }
         // 체력비례 피해
