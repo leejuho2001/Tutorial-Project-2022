@@ -1306,6 +1306,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _uimanager: {fileID: 1469985436}
+  _scenechanger: {fileID: 0}
   oxygen: 1000
   oxyuse: 1
   maxVelocity: 384
@@ -1439,6 +1440,10 @@ PrefabInstance:
     - target: {fileID: 6314923920357668659, guid: b1efd92fca5069a49a28e5f9fe953c16, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6314923920357668668, guid: b1efd92fca5069a49a28e5f9fe953c16, type: 3}
+      propertyPath: m_FillAmount
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6314923920803522702, guid: b1efd92fca5069a49a28e5f9fe953c16, type: 3}
       propertyPath: m_Name
