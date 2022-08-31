@@ -23,6 +23,8 @@ namespace playable
         [SerializeField] float shootDelay;
         [SerializeField] bool zetpackAble;
 
+
+        bool invincibleTime;
         bool canShoot;
         bool canJump;
         bool zetpackActivated;
@@ -35,6 +37,7 @@ namespace playable
             collid = gameObject.GetComponent<BoxCollider2D>();
             rigid = gameObject.GetComponent<Rigidbody2D>();
             acter = gameObject.GetComponent<playable.CharacterAct>();
+            invincibleTime = false;
             canJump = true;
             canShoot = true;
             direction = 0;
@@ -92,6 +95,17 @@ namespace playable
             return direction;
         }
 
+        public bool givInvTime()
+        {
+            return invincibleTime;
+        }
+
+        IEnumerator Invincible(int time)
+        {
+            invincibleTime = true;
+            yield return new WaitForSeconds((float)time);
+            invincibleTime = false;
+        }
 
         IEnumerator jumpCooltime(float cool)
         {
@@ -114,16 +128,25 @@ namespace playable
             else HP = result;
         }
 
-        public void p_damage(int percent)
+        public void p_OxyUse(int percent)
         {
             float onePercent = oxygen * 0.01f;
             HP -= onePercent * percent;
+        }
+        public void p_damage(int percent)
+        {
+            p_OxyUse(percent);
+            
+            gameObject.GetComponent<SpriteManager>().blinkf(3);
+            StartCoroutine(Invincible(3));
         }
         // 체력비례 피해
 
         public void damage(int dmg)
         {
             HP -= dmg;
+            gameObject.GetComponent<SpriteManager>().blinkf(3);
+            StartCoroutine(Invincible(3));
         }
         //일반 피해
 
@@ -165,7 +188,7 @@ namespace playable
             {
                 if (canShoot == true)
                 {
-                    p_damage(1);
+                    p_OxyUse(1);
                     acter.shoot();
                     shootCooltime(shootDelay);
                 }
