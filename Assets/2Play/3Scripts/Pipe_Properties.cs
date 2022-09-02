@@ -18,6 +18,8 @@ public class Pipe_Properties : MonoBehaviour
         
     }
 
+
+
     public bool givIsOn()
     {
         return isOn;

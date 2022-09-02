@@ -29,7 +29,7 @@ public class Bullet_Properties : MonoBehaviour
 
     public void Activate(int comp, int x, int y)
     {
-        Debug.Log("Activated");
+        //Debug.Log("Activated");
         Vector3 basePosition = character.transform.position;
         Vector3 addVector = new Vector3((float)x, (float)y, 0);
         rigid.transform.position = basePosition + addVector;
@@ -45,7 +45,7 @@ public class Bullet_Properties : MonoBehaviour
 
     public void deActivate()
     {
-        Debug.Log("deActivated");
+        //Debug.Log("deActivated");
         rigid.transform.position = disabled;
         rigid.velocity = new Vector3(0f, 0f, 0f);
         gun.GetComponent<BulletManager>().cylinder.Enqueue(gameObject);

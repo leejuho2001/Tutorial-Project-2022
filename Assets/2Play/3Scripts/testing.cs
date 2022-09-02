@@ -38,6 +38,15 @@ namespace non_playable
             {
                 //       bullet.GetComponent<Bullet_Properties>().Activate(spec.givDir(), 0, 0);
             }
+
+            if (Input.GetKeyDown("q"))
+            {
+                if (!spec.givInvTime())
+                {
+                    Debug.Log("damaged");
+                    spec.p_damage(3);
+                }
+            }
         }
     }
 }
