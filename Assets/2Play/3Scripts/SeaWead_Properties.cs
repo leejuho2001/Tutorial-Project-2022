@@ -8,6 +8,7 @@ public class SeaWead_Properties : MonoBehaviour
 
     // Start is called before the first frame update
     public GameObject prefab;
+    SpriteManager spriteManager;
 
     GameObject bubble1;
     GameObject bubble2;
@@ -15,6 +16,8 @@ public class SeaWead_Properties : MonoBehaviour
 
     private void Awake()
     {
+
+        spriteManager = gameObject.GetComponent<SpriteManager>();
         bubble1 = Instantiate(prefab);
         bubble2 = Instantiate(prefab);
         bubble3 = Instantiate(prefab);
@@ -22,6 +25,7 @@ public class SeaWead_Properties : MonoBehaviour
 
     private void Start()
     {
+        spriteManager.spriteReSize();
         bubbleSetting();
     }
 
