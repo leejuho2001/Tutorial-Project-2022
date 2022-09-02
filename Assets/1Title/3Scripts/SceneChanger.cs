@@ -10,5 +10,10 @@ public class SceneChanger : MonoBehaviour
     {
         SceneManager.LoadScene(_SceneName);
     }
+    public void ChangeSceneByName_B()
+    {
+        SceneManager.LoadScene("End Story");
+    }
+    // 캐릭터와 scenemanager 연결 해야 작동함
 
 }
