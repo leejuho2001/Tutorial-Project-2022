@@ -9,16 +9,19 @@ public class Bubble_Properties : MonoBehaviour
 
     Rigidbody2D rigid;
     CircleCollider2D collid;
+    SpriteManager spriteManager;
     // Start is called before the first frame update
 
     private void Awake()
     {
         collid = gameObject.GetComponent<CircleCollider2D>();
         rigid = gameObject.GetComponent<Rigidbody2D>();
+        spriteManager = gameObject.GetComponent<SpriteManager>();
     }
     void Start()
     {
         disabled = new Vector3(-800f, -1000f, 0);
+        spriteManager.spriteReSize();
     }
 
     public void Activate(GameObject seeWeed, float x, float y)

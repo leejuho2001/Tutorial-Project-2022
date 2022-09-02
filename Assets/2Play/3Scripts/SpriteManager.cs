@@ -17,10 +17,23 @@ public class SpriteManager : MonoBehaviour
     {
         
     }
-
-    void spriteReSize()
+    public void flip(bool fliped)
     {
+        sprite.flipX = fliped;
+    }
+    public void spriteReSize()
+    {
+        Sprite image = sprite.sprite;
+        float sizeX = image.bounds.size.x;
+        float sizeY = image.bounds.size.y;
 
+        Vector3 spriteSize = gameObject.transform.GetChild(0).transform.localScale;
+        spriteSize.x /= sizeX;
+        spriteSize.y /= sizeY;
+        gameObject.transform.GetChild(0).transform.localScale = spriteSize;
+
+        gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
     }
 
     IEnumerator hit(int time)

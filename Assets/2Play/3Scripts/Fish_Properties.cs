@@ -18,10 +18,6 @@ public class Fish_Properties : MonoBehaviour
         mainCamera = GameObject.Find("Main Camera");
         rigid = gameObject.GetComponent<Rigidbody2D>();
         monsterBase = gameObject.GetComponent<Monster_Base>();
-    }
-
-    void Start()
-    {
         
     }
 

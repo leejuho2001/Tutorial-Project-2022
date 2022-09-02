@@ -25,7 +25,7 @@ public class Monster_Base : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        spriteManager.spriteReSize();
     }
 
     // Update is called once per frame

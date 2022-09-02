@@ -9,6 +9,7 @@ namespace playable
         Rigidbody2D rigid;
         BoxCollider2D collid;
         playable.CharacterAct acter;
+        SpriteManager manager;
 
         //산소 UI슬라이더와 연결
         [SerializeField] UI_Manager _uimanager;
@@ -37,10 +38,12 @@ namespace playable
             collid = gameObject.GetComponent<BoxCollider2D>();
             rigid = gameObject.GetComponent<Rigidbody2D>();
             acter = gameObject.GetComponent<playable.CharacterAct>();
+            manager = gameObject.GetComponent<SpriteManager>();
+
             invincibleTime = false;
             canJump = true;
             canShoot = true;
-            direction = 0;
+            direction = 1;
             epsilon = 0.001f;
             zetpackActivated = false;
             HP = (float)oxygen;
@@ -49,7 +52,8 @@ namespace playable
         void Start()
         {
             Vector3 objectScale = transform.localScale;
-            reSize(objectScale);
+            //reSize(objectScale);
+            manager.spriteReSize();
             StartCoroutine("usingOxy");
 
             //산소 UI슬라이더와 연결
@@ -162,8 +166,6 @@ namespace playable
 
         private void Update()
         {
-            if (direction != 1 && rigid.velocity.x >= 0) direction = 1;
-            else if (direction != -1 && rigid.velocity.x < 0) direction = -1;
 
             if (HP < 0)
             {
@@ -171,9 +173,17 @@ namespace playable
                 Application.Quit();
             }
 
-            if (Input.GetKey(KeyCode.LeftArrow)) acter.left_acceleration();
+            if (Input.GetKey(KeyCode.LeftArrow)) {
+                direction = -1;
+                manager.flip(true);
+                acter.left_acceleration();
+            }
 
-            if (Input.GetKey(KeyCode.RightArrow)) acter.right_acceleration();
+            if (Input.GetKey(KeyCode.RightArrow)) {
+                direction = 1;
+                manager.flip(false);
+                acter.right_acceleration(); 
+            }
 
             if (Input.GetKeyDown("x"))
             {

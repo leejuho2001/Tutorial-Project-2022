@@ -12,17 +12,20 @@ public class Bullet_Properties : MonoBehaviour
     Rigidbody2D rigid;
     GameObject character;
     GameObject gun;
+    SpriteManager spriteManager;
     // Start is called before the first frame update
     private void Awake()
     {
         gun = GameObject.Find("Gun");
         character = GameObject.Find("character");
         rigid = gameObject.GetComponent<Rigidbody2D>();
+        spriteManager = gameObject.GetComponent<SpriteManager>();
     }
 
     void Start()
     {
         disabled = new Vector3(-1000f, -1000f, 0);
+        spriteManager.spriteReSize();
         deActivate();
     }
 
