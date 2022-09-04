@@ -13,7 +13,6 @@ namespace playable
 
         //산소 UI슬라이더와 연결
         [SerializeField] UI_Manager _uimanager;
-        [SerializeField] SceneChanger _scenechanger;
         //산소 UI슬라이더와 연결
 
         [SerializeField] int oxygen;
@@ -209,14 +208,6 @@ namespace playable
             //산소 UI슬라이더와 연결
             
         }
-        //골인 구현
-        private void OnCollisionEnter2D(Collision2D collision)
-        {
-            if (collision.gameObject.name == "Goal")
-            {
-                _scenechanger.ChangeSceneByName_B();
-            }
-        }
-        //골인 구현
+        
     }
 }
