@@ -7,6 +7,7 @@ public class Switch_Properties : MonoBehaviour
     // Start is called before the first frame update
     BoxCollider2D collid;
     SpriteRenderer sprite;
+    SpriteManager manager;
 
     [SerializeField] GameObject[] connectedObject;
     [SerializeField] float ONTime;
@@ -20,6 +21,7 @@ public class Switch_Properties : MonoBehaviour
     {
         collid = gameObject.GetComponent<BoxCollider2D>();
         sprite = transform.GetChild(0).GetComponent<SpriteRenderer>();
+        manager = gameObject.GetComponent<SpriteManager>();
         isActivated = false;
         normal = new Color(246/255f, 1, 194/255f);
         on = new Color(1, 98/255f, 229/255f);
@@ -29,6 +31,7 @@ public class Switch_Properties : MonoBehaviour
     {
         Vector3 objectScale = transform.localScale;
         reSize(objectScale);
+        manager.spriteReSize();
         sprite.color = normal;
     }
 

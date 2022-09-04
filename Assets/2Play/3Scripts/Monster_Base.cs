@@ -50,15 +50,16 @@ public class Monster_Base : MonoBehaviour
         invincibleTime = false;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.tag == "Player")
         {
             playable.CharacterSpec spec = collision.GetComponent<playable.CharacterSpec>();
             if (spec.givInvTime())
                 return;
-            else
+            else if (p_atk > 0)
                 spec.p_damage(p_atk);
+            else return;
         }
 
         else if (collision.tag == "Bullet")
